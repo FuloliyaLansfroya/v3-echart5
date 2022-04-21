@@ -25,17 +25,20 @@ npm i v3-chart5 -S
 安装完成后，即可使用 `import` 或 `require` 使用。
 
 ```js
-import Vue from 'vue'
-import VeCharts from 've-charts'
-Vue.use(VeCharts)
+import { createApp } from 'vue'
+import {LineGraph} from 'v3-echart5'
+import App from './App.vue'
+const app = createApp(App)
+app.component(LineGraph.name, LineGraph)
+app.mount('#app')
 ```
 
 ## 文档
 
-| 服务 | 地址 |
+<!-- | 服务 | 地址 |
 | :--: | :--: |
 | GitHub Page | [https://vueblocks.github.io/ve-charts](https://vueblocks.github.io/ve-charts) |
-| Gitee Page | [https://vueblocks.gitee.io/ve-charts/](https://vueblocks.gitee.io/ve-charts/) |
+| Gitee Page | [https://vueblocks.gitee.io/ve-charts/](https://vueblocks.gitee.io/ve-charts/) | -->
 
 
 
