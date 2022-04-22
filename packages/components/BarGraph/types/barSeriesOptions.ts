@@ -1,9 +1,9 @@
-import { SeriesOptions, IgnoreOptions, LineType, ShadowOptions, CallbackDataParams } from "../../../types";
+import { SeriesOptions, IgnoreOptions, LineType, ShadowOptions, CallbackParams } from "../../../types";
 
 /** 样式 */
 export interface ItemStyle extends ShadowOptions {
   /** 图形颜色，默认从全局调色盘 option.color 获取颜色，这里类型做了简化，完整类型参看https://echarts.apache.org/zh/option.html#series-bar.itemStyle.color */
-  color?: string | ((params: CallbackDataParams) => string);
+  color?: string | ((params: CallbackParams) => string);
 
   /** 图形的描边颜色。支持的颜色格式同color，默认#000 */
   borderColor?: string;

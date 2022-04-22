@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {TooltipOptions, TooltipFormatter, TriggerType} from '../../types/tooltipsOptions';
-import { tooltipAdaptor } from '../util';
+import { tooltipAdaptor } from '../../utils';
 
 export const tooltip = (formatter: TooltipFormatter | null, trigger?: TriggerType, defaultFormatter?: TooltipFormatter): TooltipOptions => ({
   confine: true, // 是否将tooltip框限制在图表的区域内

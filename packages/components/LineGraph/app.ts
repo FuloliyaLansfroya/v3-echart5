@@ -4,19 +4,41 @@ import CanvasContainer from "../CanvasContainer";
 import { use } from "echarts/core";
 import { valueAxis, cateAxis, grid, dataZoom } from "../../method/option/";
 import { tooltip } from "../../method/option/tooltip";
+import { LineSeriesOptions } from "./types/LineSeriesOptions";
+import { CateAxisOptions, ValueAxisOptions } from "../../types";
 import { legend, series } from "./option";
-import { isPlainObject } from "../../method/util";
+import { isObject } from "../../utils";
 import { defineComponent } from "vue";
 use([LineChart]);
 export default defineComponent({
   name: "LineGraph",
   extends: CanvasContainer,
   props: {
+    /**
+     * 传入数据
+     *
+     * 1、如果只显示一条默认折线图，直接传入数据(number[])即可
+     * 2、如果要显示多条曲线，或要自定义曲线配置时，请传入LineSeriesOptions[]
+     */
     data: { type: Array, default: () => [] },
+    /**
+     * 类目轴配置
+     *
+     * 1、默认类目轴是x轴
+     * 2、默认类目轴可以只传类目数据，例如['2021/07/01', '2021/07/02',...]
+     * 3、当类目轴有多条，或者需要覆盖默认配置时，可以传CateAxisOptions[]
+     */
     cateAxis: { type: Array, default: () => [] },
+    /**
+     * 数值轴配置
+     *
+     * 1、y轴默认为数值轴
+     * 2、数值轴默认可以不传
+     * 3、如果数值轴有多条，或者需要覆盖默认配置时，可以传ValueAxisOptions[]
+     */
     valueAxis: { type: Array, default: () => [] },
     /** 是否旋转坐标轴，即x轴y轴互换(x变数值轴，y轴变类目轴) */
-    rotateAxis: { type: Boolean, default: false },
+    isRotateAxis: { type: Boolean, default: false },
     /** 是否显示数值刻度分割线 */
     valueSplitLine: { type: Boolean, default: true },
     /** 是否显示数值轴坐标轴线 */
@@ -53,7 +75,7 @@ export default defineComponent({
   computed: {
     normalizedValueAxis() {
       const { isPercent, valueAxisLine, valueAxisTick, valueSplitLine, valueAxisLabel } = this.$props;
-      const position = { position: this.$props.rotateAxis ? "top" : "bottom" };
+      const position = { position: this.$props.isRotateAxis ? "top" : "bottom" };
       if (this.$props.valueAxis.length) {
         return _.merge(
           this.$props.valueAxis.map(() => valueAxis(valueAxisLine, valueAxisTick, valueSplitLine, valueAxisLabel, isPercent)),
@@ -63,14 +85,14 @@ export default defineComponent({
       return [_.merge(valueAxis(valueAxisLine, valueAxisTick, valueSplitLine, valueAxisLabel, isPercent), position)];
     },
     normalizedCateAxis() {
-      if (!this.$props.cateAxis.length) return [cateAxis([], this.$props.rotateAxis)];
-      if (this.$props.cateAxis[0] && isPlainObject(this.$props.cateAxis[0])) {
+      if (!this.$props.cateAxis.length) return [cateAxis([], this.$props.isRotateAxis)];
+      if (this.$props.cateAxis[0] && isObject(this.$props.cateAxis[0])) {
         return _.merge(
-          (this.$props.cateAxis as any[]).map((ca) => cateAxis(ca.data, this.$props.rotateAxis)),
+          (this.$props.cateAxis as any[]).map((ca) => cateAxis(ca.data, this.$props.isRotateAxis)),
           this.$props.cateAxis
         );
       }
-      return [cateAxis(this.$props.cateAxis as string[], this.$props.rotateAxis)];
+      return [cateAxis(this.$props.cateAxis as string[], this.$props.isRotateAxis)];
     },
   },
   methods: {
@@ -79,9 +101,9 @@ export default defineComponent({
         grid: grid(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
         legend: legend(this.$props.data, this.$props.legendOrder),
         tooltip: tooltip(this.$props.tooltipFormatter, "axis"),
-        xAxis: this.$props.rotateAxis ? this.normalizedValueAxis : this.normalizedCateAxis,
-        yAxis: this.$props.rotateAxis ? this.normalizedCateAxis : this.normalizedValueAxis,
-        series: series(this.$props.data, this.$props.rotateAxis),
+        xAxis: this.$props.isRotateAxis ? this.normalizedValueAxis : this.normalizedCateAxis,
+        yAxis: this.$props.isRotateAxis ? this.normalizedCateAxis : this.normalizedValueAxis,
+        series: series(this.$props.data, this.$props.isRotateAxis),
         dataZoom: dataZoom(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
       };
       return options;
