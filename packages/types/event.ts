@@ -1,4 +1,4 @@
-export interface CallbackDataParams {
+export interface CallbackParams {
   /** 当前点击的图形元素所属的组件名称'series'、'markLine'、'markPoint'、'timeLine' */
   componentType?: string;
   // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义

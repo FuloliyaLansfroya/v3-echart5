@@ -6,7 +6,7 @@ import { FormatterParams, TooltipFormatter } from "../../types";
 import { RatioDataType, RatioSeriesOptions } from "./types/ratioSeriesOptions";
 import { tooltip } from "../../method/option/tooltip";
 import { legend, series } from "./option";
-import { formatterTransfer } from "../../method/util";
+import { formatterTransfer } from "../../utils";
 import { sortData } from "./util";
 import { defineComponent } from "vue";
 use([PieChart]);
@@ -14,6 +14,11 @@ export default defineComponent({
   name: "PieGraph",
   extends: CanvasContainer,
   props: {
+    /**
+     * 传入数据
+     *
+     * 如果只显示一个默认饼状图，直接传入数据(number[])即可
+     */
     data: { type: [Object, Array], default: () => [] },
     /** 文字标签展示的位置，默认为outside展示在外面，inside展示在扇区内部，center只有在type为ring的时候才可以展示，显示在圆环中心, none展示为默认，hidden则不展示 */
     labelPosition: { type: String, default: "none" },

@@ -12,6 +12,7 @@ export default defineComponent({
       type: [Number, String],
       default: 480,
     },
+    /** 是否启用图表事件 */
     listenEvent: {
       type: Boolean,
       default: false
@@ -50,16 +51,22 @@ export default defineComponent({
     },
   },
   methods: {
+
+    // 初始化画布宽高
     initSize() {
       this.canvasWidth = this.$props.width;
       this.canvasHeight = this.$props.height;
     },
+
+    // TODO: once被弃用 暂不使用
     // initEvent() {
     //   window.addEventListener('resize', this.onResize);
     //   this.$once('hook:beforeDestroy', () => {
     //     window.removeEventListener('resize', this.onResize);
     //   });
     // },
+    
+    // 初始化画布类
     initCanvas() {
       const wrapClass = `.${this.uniqueClassName}`;
       const { width, height } = document
@@ -71,16 +78,22 @@ export default defineComponent({
       this.canvasHeight = height;
       this.el = this.el || document.querySelector(`${wrapClass} .ts-canvas`);
     },
+
+    // 图表配置项，由子类来填充
     getOptions(): Record<string, any> {
       //   if (this.originalOptions) return this.originalOptions;
       throw new Error("getOptions must be implemented!");
     },
+
+    // 图表事件注册
     initChartEvent() {
       const { listenEvent } = this;
       listenEvent && this.chart?.on("click", (params: any) => {
         this.$emit("chartEvent", params);
       });
     },
+
+    // 图表渲染
     renderChart(animation = true) {
       const render = () => {
         if (this.chart) {
@@ -98,6 +111,8 @@ export default defineComponent({
       this.initCanvas();
       this.$nextTick(() => render());
     },
+
+    // 重渲染
     reRender() {
       const options = this.getOptions();
       options.animation = true;
@@ -106,6 +121,8 @@ export default defineComponent({
         this.chart.setOption(options);
       }
     },
+
+    //监听宽高变化
     initWatch() {
       watch(this.$props, (newVal, oldVal) => {
         if (this.$props.width > 0) {

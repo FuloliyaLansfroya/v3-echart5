@@ -1,16 +1,21 @@
-import { isPlainObject } from "../../../method/util";
+import { isObject } from "../../../utils";
 import { genBarItemColor } from "../../LineGraph/option";
 import { BarSeriesOptions } from "../types/barSeriesOptions";
 
-/** 生成趋势图series */
-export const series = (data: number[] | BarSeriesOptions[], rotateAxis: boolean): BarSeriesOptions[] => {
+/**
+ * 生成柱状图series
+ * @param data 数据
+ * @param isRotateAxis 是否轴旋转
+ * @returns series配置项
+ */
+export const series = (data: number[] | BarSeriesOptions[], isRotateAxis: boolean): BarSeriesOptions[] => {
   if (!data.length) return [];
-  if (data[0] && isPlainObject(data[0])) {
-    return (data as BarSeriesOptions[]).map((d) => {
-      const itemStyle = genBarItemColor(d.type, rotateAxis, d.data.length);
+  if (data[0] && isObject(data[0])) {
+    return (data as BarSeriesOptions[]).map((value) => {
+      const itemStyle = genBarItemColor(value.type, isRotateAxis, value.data.length);
       return {
         ...itemStyle,
-        ...d,
+        ...value,
         type: "bar",
       };
     });

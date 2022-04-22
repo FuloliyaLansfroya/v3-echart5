@@ -1,7 +1,7 @@
-// import { DataZoomTypes, GridOptions } from '../../types';
+import { DataZoomTypes, GridOptions } from '../../types';
 
-export const grid = (dataZoomXShow: boolean, dataZoomYShow: boolean, dataZoomType: any, data: any[]): any => {
-  const config: any = {};
+export const grid = (dataZoomXShow: boolean, dataZoomYShow: boolean, dataZoomType: DataZoomTypes, data: any[]): GridOptions => {
+  const config: GridOptions = {};
 
   // 开启了slider dataZoom后，x轴位置调整，防止遮挡住dataZoom
   if (dataZoomXShow && dataZoomType === 'slider') {
