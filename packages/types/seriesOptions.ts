@@ -6,7 +6,7 @@ export type LabelFormatterParams = DefaultLabelFormatterCallbackParams;
 export type SeriesType =
   'line' | 'area'
   | 'bar' | 'pie' | 'rose'
-  | 'ring' | 'scatter' | 'radar' | 'tree' | 'gauge' | 'funnel' | 'sankey'
+  | 'ring' | 'scatter' | 'radar' | 'tree' | 'gauge' | 'funnel' | 'sankey' | 'sunburst'
 
 export interface SeriesOptions {
   type: SeriesType;
