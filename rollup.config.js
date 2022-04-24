@@ -15,12 +15,10 @@ export default {
     name: 'v3-echart5',
     file: 'dist/lib/v3-echart5.js',
     format: 'umd',
-    plugins: [terser()]
   }, {
     name: 'vue3-echarts5',
     file: 'dist/lib/v3-echart5.esm.js',
     format: 'es',
-    plugins: [terser()]
   }],
   plugins: [
     esbuild({
