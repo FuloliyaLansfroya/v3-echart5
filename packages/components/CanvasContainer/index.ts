@@ -1,57 +1,55 @@
 import { watch, h, defineComponent, markRaw } from "vue";
 import { isNumber } from "../../utils/index";
+import _ from "lodash";
 import echarts from "../../interface/echarts";
 export default defineComponent({
   name: "CanvasContainer",
   props: {
     width: {
       type: [Number, String],
-      default: 480,
+      default: 1000,
     },
     height: {
       type: [Number, String],
-      default: 480,
+      default: 1000,
     },
     /** 是否启用图表事件 */
     listenEvent: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data: (): any => ({
     uniqueClassName: `ts-vview-${Math.floor(Math.random() * 10000)}`,
     el: null,
     chart: null,
     canvasWidth: 0,
-    canvasHeight: 0, 
+    canvasHeight: 0,
   }),
   computed: {
     className(): String {
-      return `ts-vview ${this.uniqueClassName}`
+      return `ts-vview ${this.uniqueClassName}`;
     },
     containerStyle(): Object | String {
       return this.$props.width > 0
         ? {
-          width: isNumber(this.$props.width)
-            ? `${this.$props.width}px`
-            : `${this.$props.width}`,
-          height: isNumber(this.$props.height)
-            ? `${this.$props.height}px`
-            : `${this.$props.height}`,
-        }
+            width: isNumber(this.$props.width) ? `${this.$props.width}px` : `${this.$props.width}`,
+            height: isNumber(this.$props.height) ? `${this.$props.height}px` : `${this.$props.height}`,
+          }
         : "";
     },
     canvasStyle(): Object {
       return {
         width: isNumber(this.$props.width) ? `${this.$props.width}px` : "100%",
-        height: isNumber(this.$props.height)
-          ? `${this.$props.height}px`
-          : "100%",
+        height: isNumber(this.$props.height) ? `${this.$props.height}px` : "100%",
       };
     },
   },
   methods: {
-
     // 初始化画布宽高
     initSize() {
       this.canvasWidth = this.$props.width;
@@ -65,13 +63,11 @@ export default defineComponent({
     //     window.removeEventListener('resize', this.onResize);
     //   });
     // },
-    
+
     // 初始化画布类
     initCanvas() {
       const wrapClass = `.${this.uniqueClassName}`;
-      const { width, height } = document
-        .querySelector(wrapClass)
-        ?.getBoundingClientRect() || { width: 0, height: "100%" };
+      const { width, height } = document.querySelector(wrapClass)?.getBoundingClientRect() || { width: 0, height: "100%" };
       if (!this.$props.width) {
         this.canvasWidth = width;
       }
@@ -88,9 +84,10 @@ export default defineComponent({
     // 图表事件注册
     initChartEvent() {
       const { listenEvent } = this;
-      listenEvent && this.chart?.on("click", (params: any) => {
-        this.$emit("chartEvent", params);
-      });
+      listenEvent &&
+        this.chart?.on("click", (params: any) => {
+          this.$emit("chartEvent", params);
+        });
     },
 
     // 图表渲染
@@ -100,7 +97,7 @@ export default defineComponent({
           echarts.dispose(this.chart);
           this.chart = null;
         }
-        const options = this.getOptions();
+        const options = _.merge(this.getOptions(), this.$props.options);
         options.animation = animation;
         if (this.el && options) {
           this.chart = markRaw(echarts.init(this.el));
@@ -114,7 +111,7 @@ export default defineComponent({
 
     // 重渲染
     reRender() {
-      const options = this.getOptions();
+      const options = _.merge(this.getOptions(), this.$props.options);
       options.animation = true;
       if (this.chart && options) {
         this.chart.clear();
@@ -134,9 +131,13 @@ export default defineComponent({
         }
       });
     },
+    /** 子类可在此定制dom 内容 */
+    extraDOMElement(dom?: "<div>123</div>" | JSX.Element) {
+      return dom;
+    },
   },
   created() {
-    this.initSize
+    this.initSize;
   },
   mounted() {
     this.renderChart();
@@ -147,8 +148,11 @@ export default defineComponent({
     this.chart?.dispose();
   },
   render() {
+    const _this = this;
     return h("div", { class: this.className, style: this.containerStyle }, [
       h("div", { class: "ts-canvas", style: this.canvasStyle }),
+      this.extraDOMElement(),
+      h("div", null, this.$slots.chartSlot ? this.$slots.chartSlot() : ""),
     ]);
   },
 });
