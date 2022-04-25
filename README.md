@@ -38,7 +38,7 @@ app.mount('#app')
 | 服务 | 地址 |
 | :--: | :--: |
 | GitHub Page | [https://github.com/FuloliyaLansfroya/v3-echart5](https://github.com/FuloliyaLansfroya/v3-echart5) |
-| Gitee Page | [https://fuloliyalansfroya.github.io/v3-echart5-page/](https://fuloliyalansfroya.github.io/v3-echart5-page/) |
+| 文档 | [https://fuloliyalansfroya.github.io/v3-echart5-page/](https://fuloliyalansfroya.github.io/v3-echart5-page/) |
 
 
 

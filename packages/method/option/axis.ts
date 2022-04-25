@@ -59,7 +59,7 @@ export const cateAxis = (data: any, isRotate: boolean): any => ({
   type: 'category',
   data,
   axisTick: {
-    alignWithLabel: true,
+    alignWithLabel: false,
   },
   axisLabel: {
     formatter: (val: string | number) => {
@@ -72,7 +72,7 @@ export const cateAxis = (data: any, isRotate: boolean): any => ({
     },
   },
   axisLine: {
-    onZero: false,
+    onZero: true,
   },
   axisPointer: { type: 'shadow' },
 });
