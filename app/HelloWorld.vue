@@ -5,8 +5,8 @@
         <!-- <template #chartSlot>123</template> -->
       </LineGraph>
     </div>
-    <!-- <div><BarGraph :cateAxis="state.cateAxis1" :data="state.data01" /></div>
-    <div><PieGraph :data="state.data1" /></div> -->
+    <div><BarGraph :cateAxis="state.cateAxis1" :data="state.data01" :BarOption="state.BarOption " /></div>
+    <!-- <div><PieGraph :data="state.data1" /></div> -->
     <!-- <div><SunburstGraph :data="state.data3" :option="state.sunburstOptions" /></div> -->
   </div>
 </template>
@@ -31,15 +31,18 @@ const state = reactive({
   ],
   data01: [
     {
-      type: "area",
       name: "dat3a",
       data: [120, 132, 101, 134, 90, 230, 210],
     },
     {
-      type: "area",
       name: "dat4a2",
       data: [12, 13, 10, 13, 9, 23, 21],
     },
+  ],
+  BarOption: [
+    {
+      name: 'dat3a'
+    }
   ],
   data1: {
     type: "ring",

@@ -102,7 +102,6 @@ export default defineComponent({
   },
   methods: {
     getOptions(): any {
-      console.log(series(this.$props.data,this.$props.LineOption, this.$props.isRotateAxis))
       const options = {
         grid: grid(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
         legend: legend(this.$props.data, this.$props.legendOrder),

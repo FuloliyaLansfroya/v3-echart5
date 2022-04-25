@@ -19,6 +19,11 @@ export default defineComponent({
      * 2、如果要显示多条柱状，或要自定义配置时，请传入BarSeriesOptions[]
      */
     data: { type: Array, default: () => [] },
+      /**
+     * 柱状图配置
+     * 若要使用该参数，需在data里使用name，传入数据类型为LineOption[]
+     */
+    BarOption: { type: Array, default: () => []}
   },
   methods: {
     getOptions(): any {
@@ -28,7 +33,7 @@ export default defineComponent({
         tooltip: tooltip(this.$props.tooltipFormatter, "axis"),
         xAxis: this.$props.isRotateAxis ? this.normalizedValueAxis : this.normalizedCateAxis,
         yAxis: this.$props.isRotateAxis ? this.normalizedCateAxis : this.normalizedValueAxis,
-        series: series(this.$props.data, this.$props.isRotateAxis),
+        series: series(this.$props.data,this.$props.BarOption, this.$props.isRotateAxis),
         dataZoom: dataZoom(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
       };
       return options;

@@ -15,9 +15,9 @@ export const legend = (data: any[], legendOrder: LegendOrder): LegendOptions => 
     desc: (a: LegendOrderInfo, b: LegendOrderInfo) => b.latestData - a.latestData,
   };
   const legendList: LegendOrderInfo[] = data.map((val) => {
-    return val.value ? {
+    return val.data ? {
       name: val.name,
-      latestData: val.value.slice(-1)[0],
+      latestData: val.data.slice(-1)[0],
     } : val;
   });
   if (legendOrder !== 'none') {
