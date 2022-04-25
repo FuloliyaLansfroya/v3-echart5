@@ -96,10 +96,16 @@ export interface SeriesMarkPoint {
   animation?: boolean;
 }
 
-/** 趋势图配置(line|area) */
-export interface LineSeriesOptions extends SeriesOptions {
+export interface LineData {
+    /** 趋势图数据 */
+    data: (number | string)[]
+    /**趋势图名称，用来链接数据对应的option */
+    name: string
+}
 
-  /** 该系列使用的坐标系，默认cartesian2d */
+export interface LineOption extends SeriesOptions {
+
+    /** 该系列使用的坐标系，默认cartesian2d */
   coordinateSystem?: 'cartesian2d' | 'polar';
 
   /** 使用的x轴的index，在单个图表实例中存在多个x轴的时候有用 */
@@ -167,9 +173,6 @@ export interface LineSeriesOptions extends SeriesOptions {
   /** 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息,详见https://echarts.apache.org/zh/option.html#series-line.dimensions */
   dimensions?: string[];
 
-  /** 具体数据项，类型已被缩小 */
-  data: (number | string )[];
-
   /** 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件 */
   silent?: boolean;
 
@@ -184,4 +187,8 @@ export interface LineSeriesOptions extends SeriesOptions {
 
   /** 图表标域，常用于标记图表中某个范围的数据，例如标出某段时间投放了广告 */
   markArea?: IgnoreOptions;
+}
+
+export interface LineSeries extends LineOption {
+    data: (number | string)[] | LineData
 }

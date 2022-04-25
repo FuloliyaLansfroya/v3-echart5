@@ -1,14 +1,13 @@
 <template>
   <div style="display: flex">
     <div>
-      <LineGraph :cateAxis="state.cateAxis" :data="state.data0">
-        <template #chartSlot>123</template>
+      <LineGraph :cateAxis="state.cateAxis" :data="state.data0" :LineOption="state.LineOption">
+        <!-- <template #chartSlot>123</template> -->
       </LineGraph>
     </div>
-    <slot name="1" />
     <!-- <div><BarGraph :cateAxis="state.cateAxis1" :data="state.data01" /></div>
     <div><PieGraph :data="state.data1" /></div> -->
-    <div><SunburstGraph :data="state.data3" :option="state.sunburstOptions" /></div>
+    <!-- <div><SunburstGraph :data="state.data3" :option="state.sunburstOptions" /></div> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -16,15 +15,19 @@ import { reactive, toRefs } from "vue";
 const state = reactive({
   data0: [
     {
-      type: "area",
       name: "data",
       data: [120, 132, 101, 134, 90, 230, 210],
     },
     {
-      type: "area",
       name: "data2",
       data: [12, 13, 10, 13, 9, 23, 21],
     },
+  ],
+  LineOption: [
+    {
+      name: 'data',
+      type: 'area'
+    }
   ],
   data01: [
     {

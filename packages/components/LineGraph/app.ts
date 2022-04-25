@@ -4,7 +4,7 @@ import CanvasContainer from "../CanvasContainer";
 import { use } from "echarts/core";
 import { valueAxis, cateAxis, grid, dataZoom } from "../../method/option/";
 import { tooltip } from "../../method/option/tooltip";
-import { LineSeriesOptions } from "./types/LineSeriesOptions";
+import { LineOption, LineData } from './types';
 import { CateAxisOptions, ValueAxisOptions } from "../../types";
 import { legend, series } from "./option";
 import { isObject } from "../../utils";
@@ -18,9 +18,14 @@ export default defineComponent({
      * 传入数据
      *
      * 1、如果只显示一条默认折线图，直接传入数据(number[])即可
-     * 2、如果要显示多条曲线，或要自定义曲线配置时，请传入LineSeriesOptions[]
+     * 2、如果要显示多条曲线，或要自定义曲线配置时，请传入LineData[]
      */
     data: { type: Array, default: () => [] },
+    /**
+     * 趋势图配置
+     * 若要使用该参数，需在data里使用name，传入数据类型为LineOption[]
+     */
+    LineOption: {type: Array, default: () => []},
     /**
      * 类目轴配置
      *
@@ -97,13 +102,14 @@ export default defineComponent({
   },
   methods: {
     getOptions(): any {
+      console.log(series(this.$props.data,this.$props.LineOption, this.$props.isRotateAxis))
       const options = {
         grid: grid(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
         legend: legend(this.$props.data, this.$props.legendOrder),
         tooltip: tooltip(this.$props.tooltipFormatter, "axis"),
         xAxis: this.$props.isRotateAxis ? this.normalizedValueAxis : this.normalizedCateAxis,
         yAxis: this.$props.isRotateAxis ? this.normalizedCateAxis : this.normalizedValueAxis,
-        series: series(this.$props.data, this.$props.isRotateAxis),
+        series: series(this.$props.data,this.$props.LineOption, this.$props.isRotateAxis),
         dataZoom: dataZoom(this.$props.dataZoomEnableX, this.$props.dataZoomEnableY, this.$props.dataZoomType, this.$props.data),
       };
       return options;

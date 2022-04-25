@@ -10,6 +10,8 @@ export type CapType =
 /** 线型 */
 export type LineType = 'solid' | 'dashed' | 'dotted';
 
+export type JoinTyoe = "bevel" | "round" | "miter"
+
 /** 线段起点或终点标记类型，除了下面的枚举值，也支持image://来指定图片 */
 export type SymbolType = 'circle' | 'rect' | 'roundRect' | 'triangle' | 'diamond' | 'pin' | 'arrow' | 'none';
 
@@ -51,4 +53,17 @@ export interface LineStyle extends ShadowOptions {
 
   /** 用于指定线段末端的绘制方式,默认butt */
   cap?: CapType;
+}
+
+export interface BorderStyle {
+  borderColor?: string;
+  borderWidth?: number;
+  borderType?: LineType | number | number[];
+  /**用于设置虚线的偏移量，可搭配 borderType 指定 dash array 实现灵活的虚线效果。 */
+  borderDashOffset?: number;
+  /**用于指定线段末端的绘制方式，默认值为 'butt'。 */
+  borderCap?: CapType;
+  /**用于设置2个长度不为0的相连部分如何连接在一起的属性，默认值为 'bevel' */
+  borderJoin?: JoinTyoe;
+  borderMiterLimit?: number;
 }
