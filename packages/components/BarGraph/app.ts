@@ -1,7 +1,7 @@
 import { BarChart } from "echarts/charts";
 import _ from "lodash";
 import LineGraph from "../LineGraph";
-import { BarSeriesOptions } from './types/barSeriesOptions';
+import { BarData,BarOption,BarSeries } from './types';
 import { use } from "echarts/core";
 import { grid, dataZoom } from "../../method/option/";
 import { tooltip } from "../../method/option/tooltip";
@@ -16,12 +16,12 @@ export default defineComponent({
      * 传入数据
      *
      * 1、如果只显示一条默认柱状图，直接传入数据(number[])即可
-     * 2、如果要显示多条柱状，或要自定义配置时，请传入BarSeriesOptions[]
+     * 2、如果要显示多条柱状，或要自定义配置时，请传入BarData[]
      */
     data: { type: Array, default: () => [] },
       /**
      * 柱状图配置
-     * 若要使用该参数，需在data里使用name，传入数据类型为LineOption[]
+     * 若要使用该参数，需在data里使用name，传入数据类型为BarOption[]
      */
     BarOption: { type: Array, default: () => []}
   },

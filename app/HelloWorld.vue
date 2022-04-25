@@ -5,8 +5,8 @@
         <!-- <template #chartSlot>123</template> -->
       </LineGraph>
     </div>
-    <div><BarGraph :cateAxis="state.cateAxis1" :data="state.data01" :BarOption="state.BarOption " /></div>
-    <!-- <div><PieGraph :data="state.data1" /></div> -->
+    <!-- <div><BarGraph :cateAxis="state.cateAxis1" :data="state.data01" :BarOption="state.BarOption " /></div> -->
+    <div><PieGraph :data="state.data1" :RatioOption="state.RatioOption" /></div>
     <!-- <div><SunburstGraph :data="state.data3" :option="state.sunburstOptions" /></div> -->
   </div>
 </template>
@@ -25,9 +25,9 @@ const state = reactive({
   ],
   LineOption: [
     {
-      name: 'data',
-      type: 'area'
-    }
+      name: "data",
+      type: "area",
+    },
   ],
   data01: [
     {
@@ -41,19 +41,19 @@ const state = reactive({
   ],
   BarOption: [
     {
-      name: 'dat3a'
-    }
+      name: "dat3a",
+    },
   ],
-  data1: {
-    type: "ring",
-    name: "示例数据",
-    data: [
-      { name: "京东", value: 950.44 },
-      { name: "百度", value: 1700 },
-      { name: "腾讯", value: 2600 },
-      { name: "头条", value: 2000 },
-      { name: "字节", value: 3000 },
-    ],
+  data1: [
+    { name: "京东", value: 950.44 },
+    { name: "百度", value: 1700 },
+    { name: "腾讯", value: 2600 },
+    { name: "头条", value: 2000 },
+    { name: "字节", value: 3000 },
+  ],
+  RatioOption: {
+    type:'ring',
+    name:'示例数据'
   },
   data3: [
     {
@@ -121,14 +121,14 @@ const state = reactive({
   cateAxis: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   cateAxis1: ["Mons", "Tues", "Weds", "Thus", "Fris", "Sats", "Suns"],
   sunburstOptions: {
-    radius: [60, '90%'],
+    radius: [60, "90%"],
     itemStyle: {
       borderRadius: 7,
-      borderWidth: 2
+      borderWidth: 2,
     },
     label: {
-      show: false
-    }
-  }
+      show: false,
+    },
+  },
 });
 </script>
