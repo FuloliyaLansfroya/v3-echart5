@@ -18,8 +18,15 @@ export interface ItemStyle extends ShadowOptions {
   borderType?: LineType;
 }
 
+export interface BarData {
+    /**  柱状图数据 */
+    data: number[]
+    /** 柱状图名称，用来链接数据对应的option */
+    name: string
+}
+
 /** 柱状图配置(line|area) */
-export interface BarSeriesOptions extends SeriesOptions {
+export interface BarOption extends SeriesOptions {
   /** 从调色盘 option.color 中取色的策略 */
   colorBy?: "series" | "data";
 
@@ -73,12 +80,13 @@ export interface BarSeriesOptions extends SeriesOptions {
   /** 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息,详见https://echarts.apache.org/zh/option.html#series-bar.dimensions */
   dimensions?: string[];
 
-  /** 具体数据项，类型已被缩小 */
-  data: number[];
-
   /** 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件 */
   silent?: boolean;
 
   /** 是否开启动画,默认开启 */
   animation?: boolean;
+}
+
+export interface BarSeries extends BarOption {
+    data: number[] | BarData
 }

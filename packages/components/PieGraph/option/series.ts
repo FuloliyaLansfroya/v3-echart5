@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { isObject } from '../../../utils';
-import { RatioDataType, RatioSeriesOptions } from '../types/ratioSeriesOptions';
+import { RatioDataType, RatioOption,RatioSeries } from '../types';
 import {SeriesType} from '../../../types'
 
 /** pie类型的饼图默认配置 */
-const genPieSeries = (): Omit<RatioSeriesOptions, 'data'> => ({
+const genPieSeries = (): Omit<RatioOption, 'data'> => ({
   type: 'pie',
   selectedMode: true,
   selectedOffset: 10,
@@ -22,7 +22,7 @@ const genPieSeries = (): Omit<RatioSeriesOptions, 'data'> => ({
 });
 
 /** ring类型的饼图默认配置 */
-const genRingSeries = (): Omit<RatioSeriesOptions, 'data'> => ({
+const genRingSeries = (): Omit<RatioOption, 'data'> => ({
   type: 'pie',
   radius: ['45%', '70%'],
   label: {
@@ -53,7 +53,7 @@ const genRingSeries = (): Omit<RatioSeriesOptions, 'data'> => ({
 });
 
 /** rose类型的饼图默认配置 */
-const genRoseSeries = (): Omit<RatioSeriesOptions, 'data'> => ({
+const genRoseSeries = (): Omit<RatioOption, 'data'> => ({
   type: 'pie',
   roseType: true,
   radius: ['18%', '70%'],
@@ -100,11 +100,11 @@ export const genLabelOpt = (labelPosition: string) => {
  * @param labelPosition label位置 
  * @returns 
  */
-export const series = (data: RatioDataType | RatioSeriesOptions, labelPosition: string): RatioSeriesOptions[] => {
+export const series = (data: RatioDataType, RatioOption:RatioOption, labelPosition: string): RatioSeries[] => {
   const labelOpt = genLabelOpt(labelPosition);
-  if (isObject(data)) {
-    const typeSeries = getTypeSeries((data as RatioSeriesOptions).type);
-    return [_.merge(typeSeries, labelOpt, data, { type: 'pie', data: (data as RatioSeriesOptions).data, name: '' })];
+  if (RatioOption) {
+    const typeSeries = getTypeSeries((RatioOption as RatioOption).type);
+    return [_.merge(typeSeries, labelOpt, RatioOption, { type: 'pie',data, name: '' })];
   }
   data = data as RatioDataType;
   return [_.merge({ data }, getTypeSeries('rose'), labelOpt)];

@@ -41,7 +41,7 @@ export interface LabelLayout {
 }
 
 /** 占比图配置pie */
-export interface RatioSeriesOptions extends SeriesOptions {
+export interface RatioOption extends SeriesOptions {
 
   /** 小于这个角度（0 ~ 360）的扇区，不显示标签 */
   minShowLabelAngle?: number;
@@ -91,9 +91,6 @@ export interface RatioSeriesOptions extends SeriesOptions {
   /** 选中扇区的偏移距离 */
   selectedOffset?: number;
 
-  /** 具体数据项 */
-  data: RatioDataType;
-
   /** 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件 */
   silent?: boolean;
 
@@ -111,4 +108,9 @@ export interface RatioSeriesOptions extends SeriesOptions {
 
   /** 初始化动画类型，expansion为沿圆弧展开的效果，scale为缩放效果 */
   animationType?: 'expansion' | 'scale';
+}
+
+export interface RatioSeries extends RatioOption {
+    /** 具体数据项 */
+  data: RatioDataType;
 }
