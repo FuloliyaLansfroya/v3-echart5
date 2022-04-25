@@ -35,10 +35,10 @@ app.mount('#app')
 
 ## 文档
 
-<!-- | 服务 | 地址 |
+| 服务 | 地址 |
 | :--: | :--: |
-| GitHub Page | [https://vueblocks.github.io/ve-charts](https://vueblocks.github.io/ve-charts) |
-| Gitee Page | [https://vueblocks.gitee.io/ve-charts/](https://vueblocks.gitee.io/ve-charts/) | -->
+| GitHub Page | [https://github.com/FuloliyaLansfroya/v3-echart5](https://github.com/FuloliyaLansfroya/v3-echart5) |
+| Gitee Page | [https://fuloliyalansfroya.github.io/v3-echart5-page/](https://fuloliyalansfroya.github.io/v3-echart5-page/) |
 
 
 
