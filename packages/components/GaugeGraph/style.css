@@ -1,0 +1,21 @@
+.sub-data {
+  display: flex;
+  position: absolute;
+  left: 20px;
+  top: 30px;
+  padding-top: 3px;
+}
+.sub-data .sub-line {
+  width: 20px;
+  height: 2px;
+  border-top: 3px dashed #ccc;
+}
+.sub-data-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.sub-data-value {
+  font-size: 12px;
+  font-weight: bold;
+}

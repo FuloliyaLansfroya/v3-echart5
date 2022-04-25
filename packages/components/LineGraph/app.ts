@@ -18,7 +18,7 @@ export default defineComponent({
      * 传入数据
      *
      * 1、如果只显示一条默认折线图，直接传入数据(number[])即可
-     * 2、如果要显示多条曲线，或要自定义曲线配置时，请传入LineData[]
+     * 2、如果要显示多条曲线，请传入LineData[]
      */
     data: { type: Array, default: () => [] },
     /**
