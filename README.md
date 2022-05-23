@@ -40,8 +40,3 @@ app.mount('#app')
 | GitHub Page | [https://github.com/FuloliyaLansfroya/v3-echart5](https://github.com/FuloliyaLansfroya/v3-echart5) |
 | 文档 | [https://fuloliyalansfroya.github.io/v3-echart5-page/](https://fuloliyalansfroya.github.io/v3-echart5-page/) |
 
-
-
-## License
-
-MIT
