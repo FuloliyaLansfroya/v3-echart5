@@ -4,10 +4,11 @@
 import HelloWorld from './HelloWorld.vue'
 import Line from './LineGraph.vue'
 import Gauge from './GaugeGraph.vue'
+import Radar from './RadarGraph.vue'
 </script>
 
 <template>
-  <Gauge />
+  <Radar />
 </template>
 
 <style>
