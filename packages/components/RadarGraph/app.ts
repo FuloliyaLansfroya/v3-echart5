@@ -27,13 +27,6 @@ export default defineComponent({
      * 雷达图坐标系配置
      */
     IndicatorOption: { type: Object, default: null },
-    /** tooltip格式化器 */
-    tooltipFormatter: { type: Function, default: null },
-    /**
-     * legend排序： 根据最后一组数据排序
-     * 注意：如果extra中有设置legend时，此处会被extra中的值覆盖
-     * */
-    legendOrder: { type: String, default: "none" },
   },
   methods: {
     getOptions(): any {
