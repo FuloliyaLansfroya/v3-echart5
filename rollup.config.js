@@ -1,4 +1,5 @@
 // 为了保证版本一致，请复制我的 package.json 到你的项目，并把 name 改成你的库名
+const commonjs = require('@rollup/plugin-commonjs')
 import esbuild from 'rollup-plugin-esbuild'
 import vue from 'rollup-plugin-vue'
 import { terser } from "rollup-plugin-terser"
@@ -40,5 +41,6 @@ export default {
         }
       ]
     }),
+    commonjs(), terser()
   ],
 }

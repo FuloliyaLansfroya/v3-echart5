@@ -36,7 +36,6 @@ export default defineComponent({
         series: series(this.$props.data, this.$props.RadarOption),
         radar: radar(this.$props.RadarIndicator, this.$props.IndicatorOption),
       };
-      console.log(options);
       return options;
     },
   },
